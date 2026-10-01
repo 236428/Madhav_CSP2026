@@ -69,6 +69,9 @@ painter.pensize(8)
 painter.forward(100)
 ##########
 
+#Draw fish
+
+
 #Draw Trees
 def draw_trees():
     painter.penup()
@@ -89,8 +92,8 @@ def draw_trees():
     painter.forward(120)
     painter.right(90)
     painter.forward(30)
-    painter.pencolor("chartreuse4")
-    painter.fillcolor("chartreuse4")
+    painter.pencolor(color[7])
+    painter.fillcolor(color[7])
     painter.pendown()
     painter.begin_fill()
     painter.circle(40)
@@ -138,10 +141,85 @@ for step in range (4):
 
 
 #Introduce task to player
-start_answer = trtl.textinput("Start Program","You are an animal scientist in the Amazon Rainforest and you reported an interesting animal in your region. Would you like to describe it to us? Yes(y) or No(n)")
+animal_choice = ["tiger", "turtle", "rabbit",]
+start_choice = ["y", "n",]
+
+start_answer = trtl.textinput("Start Program","You are an animal scientist in the Amazon Rainforest and you reported an interesting 3-way animal breed in your region. Would you like to describe it to us? Yes(y) or No(n)")
 if (start_answer == "y"):
+    while start_answer not in start_choice:
+        start_answer = trtl.textinput("Invalid start choice", "y or n")
+
     painter.penup()
-    painter.goto(0,0)
+    painter.goto(-500,0)
+   
+    #head select
+    head_select = trtl.textinput("Head of animal","Ok, what did the head of the animal look most like, a tiger, turtle, or rabbit?")
+    while head_select not in animal_choice:
+        head_select = trtl.textinput("Invalid input", "The options were tiger, turtle, and rabbit, please select one")
+    
+    #body select
+    body_select = trtl.textinput("Body of animal","Now, what did the body of the animal look like, a tiger, turtle, or rabbit?")
+    while body_select not in animal_choice:
+        body_select = trtl.textinput("Invalid input", "The options were tiger, turtle, and rabbit, please select one")
+    while (body_select == head_select):
+        body_select = trtl.textinput("Repeat input", "Remember, it's a 3-way breed, don't pick the same one twice, tiger, turtle, or rabbit?")
+        while body_select not in animal_choice:
+            body_select = trtl.textinput("Invalid under repeat", "tiger, turtle, or rabbit. And remember, no repeats.")
+    
+    #tail select
+    tail_select = trtl.textinput("Tail of animal","Finally, what did the tail of the animal look like, a tiger, turtle, or rabbit?")
+    while tail_select not in animal_choice:
+        tail_select = trtl.textinput("Invalid input", "The options were tiger, turtle, and rabbit, please select one")
+    while (tail_select == head_select):
+        tail_select = trtl.textinput("Repeat input", "Remember, it's a 3-way breed, don't pick the same one twice, tiger, turtle, or rabbit?")
+        while tail_select not in animal_choice:
+            tail_select = trtl.textinput("Invalid under repeat", "tiger, turtle, or rabbit. And remember, no repeats.")
+    while (tail_select == body_select):
+        tail_select = trtl.textinput("Repeat input", "Remember, it's a 3-way breed, don't pick the same one twice, tiger, turtle, or rabbit?")
+        while tail_select not in animal_choice:
+            body_select = trtl.textinput("Invalid under repeat", "tiger, turtle, or rabbit. And remember, no repeats.")
+    
+    #generate animal
+    if (head_select == "tiger" and body_select == "turtle" and tail_select == "rabbit"):
+        wn.addshape("ti-tu-r.gif")
+        painter.shape("ti-tu-r.gif")
+        painter.speed(1)
+        painter.forward(500)
+        painter.stamp()
+    if (head_select == "tiger" and body_select == "rabbit" and tail_select == "turtle"):
+        wn.addshape("ti-r-tu.gif")
+        painter.shape("ti-r-tu.gif")
+        painter.speed(1)
+        painter.forward(500)
+        painter.stamp()
+    if (head_select == "turtle" and body_select == "tiger" and tail_select == "rabbit"):
+        wn.addshape("tu-ti-r.gif")
+        painter.shape("tu-ti-r.gif")
+        painter.goto(-500,-30)
+        painter.speed(1)
+        painter.forward(500)
+        painter.stamp()
+    if (head_select == "turtle" and body_select == "rabbit" and tail_select == "tiger"):
+        wn.addshape("tu-r-ti.gif")
+        painter.shape("tu-r-ti.gif")
+        painter.goto(-500,-30)
+        painter.speed(1)
+        painter.forward(500)
+        painter.stamp()
+    if (head_select == "rabbit" and body_select == "turtle" and tail_select == "tiger"):
+        wn.addshape("r-tu-ti.gif")
+        painter.shape("r-tu-ti.gif")
+        painter.goto(-500,-30)
+        painter.speed(1)
+        painter.forward(500)
+        painter.stamp()
+    if (head_select == "rabbit" and body_select == "tiger" and tail_select == "turtle"):
+        wn.addshape("r-ti-tu.gif")
+        painter.shape("r-ti-tu.gif")
+        painter.goto(-500,-30)
+        painter.speed(1)
+        painter.forward(500)
+        painter.stamp()
 else:
     wn.bye
 
