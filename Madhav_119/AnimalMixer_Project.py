@@ -3,7 +3,7 @@ wn = trtl.Screen()
 painter = trtl.Turtle()
 
 #List of colors
-color = ["Green", "Orange", "Ivory", "Black", "DarkOliveGreen", "Blue", "Blue4","chartreuse4", "chocolate4",]
+color = ["Green", "Orange", "Ivory", "Black", "DarkOliveGreen", "Blue", "Blue4", "chartreuse4", "chocolate4","yellow",]
 ##########
 
 #Draw background
@@ -70,6 +70,8 @@ painter.forward(100)
 ##########
 
 #Draw Trees
+painter.shape("classic")
+painter.pensize(8)
 def draw_trees():
     painter.penup()
     painter.pencolor(color[8])
@@ -136,6 +138,22 @@ for step in range (4):
     painter.left(90)
     painter.forward(150)
 
+#draw banana
+banana_shape = ((-20, 0),(-15, 12),(0, 18),(15, 12),(20, 0),(12, 5),(0, 8),(-12, 5))
+wn.register_shape("yellow_banana", banana_shape)
+banana = trtl.Turtle()
+banana.shape("yellow_banana")
+banana.pencolor(color[1])
+banana.fillcolor(color[9])
+banana.hideturtle()
+banana.penup()
+banana.hideturtle()
+banana.goto(300, -30)
+banana.stamp()
+banana.goto(-250, -100)
+banana.stamp()
+banana.goto(-290, -145)
+banana.stamp()
 
 #Introduce task to player
 animal_choice = ["tiger", "turtle", "rabbit",]
