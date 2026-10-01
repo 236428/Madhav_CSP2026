@@ -69,9 +69,6 @@ painter.pensize(8)
 painter.forward(100)
 ##########
 
-#Draw fish
-
-
 #Draw Trees
 def draw_trees():
     painter.penup()
@@ -145,10 +142,9 @@ animal_choice = ["tiger", "turtle", "rabbit",]
 start_choice = ["y", "n",]
 
 start_answer = trtl.textinput("Start Program","You are an animal scientist in the Amazon Rainforest and you reported an interesting 3-way animal breed in your region. Would you like to describe it to us? Yes(y) or No(n)")
+while start_answer not in start_choice:
+    start_answer = trtl.textinput("Invalid start choice", "y or n")
 if (start_answer == "y"):
-    while start_answer not in start_choice:
-        start_answer = trtl.textinput("Invalid start choice", "y or n")
-
     painter.penup()
     painter.goto(-500,0)
    
@@ -174,11 +170,18 @@ if (start_answer == "y"):
         tail_select = trtl.textinput("Repeat input", "Remember, it's a 3-way breed, don't pick the same one twice, tiger, turtle, or rabbit?")
         while tail_select not in animal_choice:
             tail_select = trtl.textinput("Invalid under repeat", "tiger, turtle, or rabbit. And remember, no repeats.")
+        while (tail_select == body_select):
+            tail_select = trtl.textinput("Repeat under repeat", "tiger, turtle, or rabbit. And remember, no repeats.")
+            while tail_select not in animal_choice:
+                body_select = trtl.textinput("Invalid under repeat", "tiger, turtle, or rabbit. And remember, no repeats.")
     while (tail_select == body_select):
         tail_select = trtl.textinput("Repeat input", "Remember, it's a 3-way breed, don't pick the same one twice, tiger, turtle, or rabbit?")
         while tail_select not in animal_choice:
             body_select = trtl.textinput("Invalid under repeat", "tiger, turtle, or rabbit. And remember, no repeats.")
-    
+        while (tail_select == head_select):
+            tail_select = trtl.textinput("Repeat under repeat", "tiger, turtle, or rabbit. And remember, no repeats.")
+            while tail_select not in animal_choice:
+                body_select = trtl.textinput("Invalid under repeat", "tiger, turtle, or rabbit. And remember, no repeats.")
     #generate animal
     if (head_select == "tiger" and body_select == "turtle" and tail_select == "rabbit"):
         wn.addshape("ti-tu-r.gif")
