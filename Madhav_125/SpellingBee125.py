@@ -1,7 +1,17 @@
-#Import the lava/volcano background
 
+import turtle as trtl
+import turtle as t
+block1 = t.Turtle()
+
+#Import the lava/volcano background
+wn = trtl.Screen()
+wn.setup(width=1.0, height=1.0)
+wn.bgpic("lava_background.gif")
 
 #Draw the blocks the character is standing on
+wn.addshape("obsidian_block.gif")
+block1.shape("obsidian_block.gif")
+block1.goto(0,0)
 
 
 #Make 3 sets of lists for each “difficulty” of the game
@@ -17,7 +27,9 @@
 
 
 #Each word should have its own if statement where if it is pulled, the designated audio plays
-
+'''
+from playsound3 import playsound
+playsound("audio_house.mp3")'''
 
 #Audio plays to the user and then one more user input asks “do you want to hear it again(a)? If not type in your answer”
 
@@ -50,3 +62,5 @@
 
 
 #(OPTIONAL) Add a user input at the very beginning asking the user what character it wants to pick
+
+wn.mainloop()
