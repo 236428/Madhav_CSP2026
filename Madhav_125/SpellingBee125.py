@@ -3,9 +3,11 @@ import turtle as trtl
 import turtle as t
 import turtle as T
 import turtle as tu
+import random as rand
 block1 = t.Turtle()
 block2 = T.Turtle()
 block3 = tu.Turtle()
+from playsound3 import playsound
 
 #Import the lava/volcano background
 wn = trtl.Screen()
@@ -30,18 +32,21 @@ Lvl1 = ["bird","blue","book","cat","dog","fish","frog","hand","house","jump","mi
 Lvl2 = []
 Lvl3 = []
 
+audio1 = ["bird.mp3","blue.mp3","book.mp3","cat.mp3","dog.mp3","fish.mp3","frog.mp3","hand.mp3","house.mp3","jump.mp3","milk.mp3","red.mp3","stop.mp3","sun.mp3","tree.mp3"]
 #Get audio files for each of the words
-'''
-from playsound3 import playsound
-playsound("house.mp3")'''
+
+'playsound("house.mp3")'
 
 #Add user input to ask what the user’s name is, store it for later
-
+Uname = trtl.textinput("User Name", "Please enter your name")
 
 #Add one more input to ask if user is ready, if yes pull a random word from list 1
-
-
-#Each word should have its own if statement where if it is pulled, the designated audio plays
+Start = trtl.textinput("Ready", "This is a spelling bee game, you have three lives and the words will get progressively harder, if you are ready to hear the first word, enter: r")
+if (Start == "r"):
+    index = rand.randrange(len(Lvl1))
+    Lvl1.pop(index)
+    #Each word should have its own if statement where if it is pulled, the designated audio plays
+    playsound(audio1[index])
 
 #Audio plays to the user and then one more user input asks “do you want to hear it again(a)? If not type in your answer”
 
