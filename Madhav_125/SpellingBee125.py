@@ -32,10 +32,10 @@ Lvl1 = ["bird","blue","book","cat","dog","fish","frog","hand","house","jump","mi
 Lvl2 = []
 Lvl3 = []
 
-audio1 = ["bird.mp3","blue.mp3","book.mp3","cat.mp3","dog.mp3","fish.mp3","frog.mp3","hand.mp3","house.mp3","jump.mp3","milk.mp3","red.mp3","stop.mp3","sun.mp3","tree.mp3"]
 #Get audio files for each of the words
+audio1 = ["bird.mp3","blue.mp3","book.mp3","cat.mp3","dog.mp3","fish.mp3","frog.mp3","hand.mp3","house.mp3","jump.mp3","milk.mp3","red.mp3","stop.mp3","sun.mp3","tree.mp3"]
 
-'playsound("house.mp3")'
+
 
 #Add user input to ask what the user’s name is, store it for later
 Uname = trtl.textinput("User Name", "Please enter your name")
@@ -44,12 +44,19 @@ Uname = trtl.textinput("User Name", "Please enter your name")
 Start = trtl.textinput("Ready", "This is a spelling bee game, you have three lives and the words will get progressively harder, if you are ready to hear the first word, enter: r")
 if (Start == "r"):
     index = rand.randrange(len(Lvl1))
-    Lvl1.pop(index)
     #Each word should have its own if statement where if it is pulled, the designated audio plays
     playsound(audio1[index])
-
-#Audio plays to the user and then one more user input asks “do you want to hear it again(a)? If not type in your answer”
-
+    #Audio plays to the user and then one more user input asks “do you want to hear it again(a)? If not type in your answer”
+    answer = trtl.textinput("Word", "If you want to hear the word again, type any single letter, if not enter your answer")
+    if (answer < len(2)):
+        playsound(audio1[index])
+        answer = trtl.textinput("Word", "Now enter your answer")
+        
+    if (answer != Lvl1[index]):
+        block1.hideturtle()
+        block2.goto(0,-250)
+        block3.goto(0,-100)
+    Lvl1.pop(index)
 
 #Add if statement, if answer is “a” play the audio, if not it will accept the given input as the answer
 
