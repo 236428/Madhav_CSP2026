@@ -9,7 +9,16 @@ block3 = trtl.Turtle()
 writer = trtl.Turtle()
 
 score = 0
+block_num = 3
 font_setup = ("Arial", 40, "normal")
+def update_spotscore(x,y):
+  global score
+  score += 1
+  writer.write(score, font=font_setup)
+
+def update_block():
+    global block_num
+    block_num -= 1
 
 writer.penup()
 writer.hideturtle()
@@ -18,6 +27,7 @@ writer.write(score, font= ("Arial", 20, "normal"))
 
 #Import the lava/volcano background
 wn = trtl.Screen()
+wn.title("Volcanic Spelling")
 wn.setup(width=1.0, height=1.0)
 wn.bgpic("lava_background.gif")
 
@@ -53,34 +63,67 @@ Uname = trtl.textinput("User Name", "This is a spelling bee game, you have three
 
 #Add one more input to ask if user is ready, if yes pull a random word from list 1
 for step in range (5):
+   # if (block_num == 0):
+
     Start = trtl.textinput("Ready", "if you are ready to hear the word, enter: r")
     if (Start == "r"):
         index = rand.randrange(len(Lvl1))
+        index2 = index
         #Each word should have its own if statement where if it is pulled, the designated audio plays
         playsound(audio1[index])
         #Audio plays to the user and then one more user input asks “do you want to hear it again(a)? If not type in your answer”
         answer = trtl.textinput("Word", "If you want to hear the word again, type any single letter, if not enter your answer")
         answer = answer.lower()
+        answer2 = answer
         if (len(answer) < 2):
             playsound(audio1[index])
             answer = trtl.textinput("Word", "Now enter your answer")
             answer = answer.lower()
             if (answer != Lvl1[index]):
-                block1.hideturtle()
-                block2.goto(0,-250)
-                block3.goto(0,-100)
-                Lvl1.pop(index)
+                if (block_num == 1):
+                    block3.hideturtle()
+                    Lvl1.pop(index)
+                    update_block()
+                if (block_num == 2):
+                    block2.hideturtle()
+                    block3.goto(0,-250)
+                    Lvl1.pop(index)
+                    update_block()
+                if (block_num == 3):
+                    block1.hideturtle()
+                    block2.goto(0,-250)
+                    block3.goto(0,-100)
+                    Lvl1.pop(index)
+                    update_block()               
             if (answer == Lvl1[index]):
-                score = score + 1
+                writer.clear()
+                update_spotscore(0,350)
                 Lvl1.pop(index)
-        if (len(answer) > 1):
-            if (answer != Lvl1[index]):
-                block1.hideturtle()
-                block2.goto(0,-250)
-                block3.goto(0,-100)
-                Lvl1.pop(index)
-            if (answer == Lvl1[index]):
-                score = score + 1
+        
+        if (len(answer2) > 1):
+            if (answer2 != Lvl1[index2]):
+                if (block_num == 1):
+                    block3.hideturtle()
+                    Lvl1.pop(index2)
+                    Lvl1.pop(index)
+                    update_block()
+                if (block_num == 2):
+                    block2.hideturtle()
+                    block3.goto(0,-250)
+                    Lvl1.pop(index2)
+                    Lvl1.pop(index)
+                    update_block()
+                if (block_num == 3):
+                    block1.hideturtle()
+                    block2.goto(0,-250)
+                    block3.goto(0,-100)
+                    Lvl1.pop(index2)
+                    update_block()
+
+            if (answer2 == Lvl1[index2]):
+                writer.clear()
+                update_spotscore(0,350)
+                Lvl1.pop(index2)
                 Lvl1.pop(index)
 
 #Add if statement, if answer is “a” play the audio, if not it will accept the given input as the answer
