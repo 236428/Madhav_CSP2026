@@ -20,6 +20,8 @@ def update_block():
     global block_num
     block_num -= 1
 
+end_game = False
+
 writer.penup()
 writer.hideturtle()
 writer.goto(0,320)
@@ -63,68 +65,66 @@ Uname = trtl.textinput("User Name", "This is a spelling bee game, you have three
 
 #Add one more input to ask if user is ready, if yes pull a random word from list 1
 for step in range (5):
-   # if (block_num == 0):
+    if (block_num < 1):
+        end_game = True
+        writer.clear()
+        writer.goto(-170,300)
+        writer.write("YOU LOSE", font= ("Arial", 50, "normal"))
 
-    Start = trtl.textinput("Ready", "if you are ready to hear the word, enter: r")
-    if (Start == "r"):
-        index = rand.randrange(len(Lvl1))
-        index2 = index
-        #Each word should have its own if statement where if it is pulled, the designated audio plays
-        playsound(audio1[index])
-        #Audio plays to the user and then one more user input asks “do you want to hear it again(a)? If not type in your answer”
-        answer = trtl.textinput("Word", "If you want to hear the word again, type any single letter, if not enter your answer")
-        answer = answer.lower()
-        answer2 = answer
-        if (len(answer) < 2):
+    while (end_game == False):
+        Start = trtl.textinput("Ready", "if you are ready to hear the word, enter: r")
+        if (Start == "r"):
+            index = rand.randrange(len(Lvl1))
+            index2 = index
+            #Each word should have its own if statement where if it is pulled, the designated audio plays
             playsound(audio1[index])
-            answer = trtl.textinput("Word", "Now enter your answer")
+            #Audio plays to the user and then one more user input asks “do you want to hear it again(a)? If not type in your answer”
+            answer = trtl.textinput("Word", "If you want to hear the word again, type any single letter, if not enter your answer")
             answer = answer.lower()
-            if (answer != Lvl1[index]):
-                if (block_num == 1):
-                    block3.hideturtle()
-                    Lvl1.pop(index)
-                    update_block()
-                if (block_num == 2):
-                    block2.hideturtle()
-                    block3.goto(0,-250)
-                    Lvl1.pop(index)
-                    update_block()
-                if (block_num == 3):
-                    block1.hideturtle()
-                    block2.goto(0,-250)
-                    block3.goto(0,-100)
-                    Lvl1.pop(index)
-                    update_block()               
-            if (answer == Lvl1[index]):
-                writer.clear()
-                update_spotscore(0,350)
+            if (len(answer) > 1):
+                if (answer != Lvl1[index]):
+                    if (block_num == 1):
+                        block3.hideturtle()
+                        update_block()
+                    if (block_num == 2):
+                        block2.hideturtle()
+                        block3.goto(0,-250)
+                        update_block()
+                    if (block_num == 3):
+                        block1.hideturtle()
+                        block2.goto(0,-250)
+                        block3.goto(0,-100)
+                        update_block()
+                if (answer == Lvl1[index]):
+                    writer.clear()
+                    update_spotscore(0,350)
+                    
                 Lvl1.pop(index)
+                audio1.pop(index)
         
-        if (len(answer2) > 1):
-            if (answer2 != Lvl1[index2]):
-                if (block_num == 1):
-                    block3.hideturtle()
-                    Lvl1.pop(index2)
-                    Lvl1.pop(index)
-                    update_block()
-                if (block_num == 2):
-                    block2.hideturtle()
-                    block3.goto(0,-250)
-                    Lvl1.pop(index2)
-                    Lvl1.pop(index)
-                    update_block()
-                if (block_num == 3):
-                    block1.hideturtle()
-                    block2.goto(0,-250)
-                    block3.goto(0,-100)
-                    Lvl1.pop(index2)
-                    update_block()
+            if (len(answer) < 2):
+                playsound(audio1[index])
+                answer = trtl.textinput("Word", "Now enter your answer")
+                answer = answer.lower()
+                if (answer != Lvl1[index]):
+                    if (block_num == 1):
+                        block3.hideturtle()
+                        update_block()
+                    if (block_num == 2):
+                        block2.hideturtle()
+                        block3.goto(0,-250)
+                        update_block()
+                    if (block_num == 3):
+                        block1.hideturtle()
+                        block2.goto(0,-250)
+                        block3.goto(0,-100)
+                        update_block()               
+                if (answer == Lvl1[index]):
+                    writer.clear()
+                    update_spotscore(0,350)
 
-            if (answer2 == Lvl1[index2]):
-                writer.clear()
-                update_spotscore(0,350)
-                Lvl1.pop(index2)
                 Lvl1.pop(index)
+                audio1.pop(index)
 
 #Add if statement, if answer is “a” play the audio, if not it will accept the given input as the answer
 
