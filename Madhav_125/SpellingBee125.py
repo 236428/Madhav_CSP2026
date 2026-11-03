@@ -7,6 +7,7 @@ block1 = trtl.Turtle()
 block2 = trtl.Turtle()
 block3 = trtl.Turtle()
 writer = trtl.Turtle()
+lvlwriter = trtl.Turtle()
 
 round = 0
 score = 0
@@ -65,16 +66,19 @@ audio2 = ["believe.mp3","calendar.mp3","collect.mp3","definitely.mp3","different
 
 #Add user input to ask what the user’s name is, store it for later
 Uname = trtl.textinput("User Name", "This is a spelling bee game, you have three lives and the words will get progressively harder, now please enter your name")
-#writer.goto(-200, 350)
-#writer.write("Level 1: Easy")
+lvlwriter.penup()
+lvlwriter.hideturtle()
+lvlwriter.goto(150, -295)
+lvlwriter.write("Level 1: Easy", font = font_setup)
 
 #Add one more input to ask if user is ready, if yes pull a random word from list 1
 for step in range (3):
     update_round()
     if (block_num < 1):
+        lvlwriter.clear()
         writer.clear()
         writer.goto(-170,300)
-        writer.write("YOU LOSE", font= ("Arial", 50, "normal"))
+        writer.write("YOU DIED", font= ("Arial", 50, "normal"))
         writer.goto(-240,-275)
         writer.write(f"{Uname}'s Score: {score}", font= ("Arial", 50, "normal"))
         break
@@ -139,12 +143,13 @@ for step in range (3):
             Lvl1.pop(index)
             audio1.pop(index)
 
-#writer.goto(-200, 350)
-#writer.write("Level 2: Hard")
+lvlwriter.clear()
+lvlwriter.write("Level 2: Hard", font = font_setup)
 
 #Now do the same for LVL2
 for step in range (3):
     if (block_num < 1):
+        lvlwriter.clear()
         writer.clear()
         writer.goto(-170,300)
         writer.write("YOU LOSE", font= ("Arial", 50, "normal"))
@@ -212,10 +217,11 @@ for step in range (3):
             audio2.pop(index)
     update_round()
 
+lvlwriter.clear()
 writer.clear()
 writer.goto(-170, 300)
 writer.write("YOU WIN!", font= ("Arial", 50, "normal"))
-writer.goto(-190,250)
+writer.goto(150,-295)
 writer.write(f"{Uname}'s Score: {score}", font= ("Arial", 30, "normal"))
 
 #Once that is working for all three word banks, add the character turtle to the block tower
