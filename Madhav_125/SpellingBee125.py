@@ -60,7 +60,8 @@ player.shape("turti.gif")
 player.penup()
 player.goto(0,134)
 
-#def update_player():
+def update_player():
+    player.goto(0, player.ycor() - 150)
 
 
 #Make 3 sets of lists for each “difficulty” of the game
@@ -82,7 +83,6 @@ lvlwriter.write("Level 1: Easy", font = font_setup)
 
 #Add one more input to ask if user is ready, if yes pull a random word from list 1
 for step in range (3):
-    update_round()
     if (block_num < 1):
         lvlwriter.clear()
         writer.clear()
@@ -92,7 +92,7 @@ for step in range (3):
         writer.write(f"{Uname}'s Score: {score}", font= ("Arial", 50, "normal"))
         break
 
-
+    update_round()
     Start = trtl.textinput("Ready", "if you are ready to hear the word, click enter")
     if (len(Start) >= 0):
         index = rand.randrange(len(Lvl1))
@@ -109,15 +109,19 @@ for step in range (3):
                 if (block_num == 1):
                     block3.hideturtle()
                     update_block()
+                    update_player()
+                    player.hideturtle()
                 if (block_num == 2):
                     block2.hideturtle()
                     block3.goto(0,-250)
                     update_block()
+                    update_player()
                 if (block_num == 3):
                     block1.hideturtle()
                     block2.goto(0,-250)
                     block3.goto(0,-100)
                     update_block()
+                    update_player()
             if (answer == Lvl1[index]):
                 writer.clear()
                 update_spotscore(0,350)
@@ -135,15 +139,19 @@ for step in range (3):
                 if (block_num == 1):
                     block3.hideturtle()
                     update_block()
+                    update_player()
+                    player.hideturtle()
                 if (block_num == 2):
                     block2.hideturtle()
                     block3.goto(0,-250)
                     update_block()
+                    update_player()
                 if (block_num == 3):
                     block1.hideturtle()
                     block2.goto(0,-250)
                     block3.goto(0,-100)
-                    update_block()            
+                    update_block()
+                    update_player()           
             if (answer == Lvl1[index]):
                 writer.clear()
                 update_spotscore(0,350)
@@ -157,7 +165,6 @@ lvlwriter.write("Level 2: Hard", font = font_setup)
 
 #Now do the same for LVL2
 for step in range (3):
-    update_round()
     if (block_num < 1):
         lvlwriter.clear()
         writer.clear()
@@ -167,6 +174,7 @@ for step in range (3):
         writer.write(f"{Uname}'s Score: {score}", font= ("Arial", 50, "normal"))
         break
 
+    update_round()
     Start = trtl.textinput("Ready", "if you are ready to hear the word, click enter")
     if (len(Start) >= 0):
         index = rand.randrange(len(Lvl2))
@@ -183,15 +191,19 @@ for step in range (3):
                 if (block_num == 1):
                     block3.hideturtle()
                     update_block()
+                    update_player()
+                    player.hideturtle()
                 if (block_num == 2):
                     block2.hideturtle()
                     block3.goto(0,-250)
                     update_block()
+                    update_player()
                 if (block_num == 3):
                     block1.hideturtle()
                     block2.goto(0,-250)
                     block3.goto(0,-100)
                     update_block()
+                    update_player()
             if (answer == Lvl2[index]):
                 writer.clear()
                 update_spotscore(0,350)
@@ -209,15 +221,19 @@ for step in range (3):
                 if (block_num == 1):
                     block3.hideturtle()
                     update_block()
+                    update_player()
+                    player.hideturtle()
                 if (block_num == 2):
                     block2.hideturtle()
                     block3.goto(0,-250)
                     update_block()
+                    update_player()
                 if (block_num == 3):
                     block1.hideturtle()
                     block2.goto(0,-250)
                     block3.goto(0,-100)
-                    update_block()            
+                    update_block()  
+                    update_player()          
             if (answer == Lvl2[index]):
                 writer.clear()
                 update_spotscore(0,350)
@@ -227,13 +243,22 @@ for step in range (3):
             audio2.pop(index)
 
 
-if (round >= 4):
+if (score >= 4):
     lvlwriter.clear()
     writer.clear()
     writer.goto(-210, 300)
     writer.write("YOU SURVIVED!", font= ("Arial", 50, "normal"))
     writer.goto(150,-295)
     writer.write(f"{Uname}'s Score: {score}", font= ("Arial", 30, "normal"))
+
+if (score <= 3):
+    lvlwriter.clear()
+    writer.clear()
+    writer.goto(-170,300)
+    writer.write("YOU DIED", font= ("Arial", 50, "normal"))
+    writer.goto(-240,-275)
+    writer.write(f"{Uname}'s Score: {score}", font= ("Arial", 50, "normal"))
+    
 
 #Once that is working for all three word banks, add the character turtle to the block tower
 
