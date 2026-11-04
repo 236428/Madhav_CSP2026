@@ -8,6 +8,8 @@ block2 = trtl.Turtle()
 block3 = trtl.Turtle()
 writer = trtl.Turtle()
 lvlwriter = trtl.Turtle()
+player = trtl.Turtle()
+
 
 round = 0
 score = 0
@@ -52,6 +54,13 @@ block3.penup()
 block3.shape("obsidian_block.gif")
 block3.goto(0,50)
 
+#add the character
+wn.addshape("turti.gif")
+player.shape("turti.gif")
+player.penup()
+player.goto(0,134)
+
+#def update_player():
 
 
 #Make 3 sets of lists for each “difficulty” of the game
@@ -84,8 +93,8 @@ for step in range (3):
         break
 
 
-    Start = trtl.textinput("Ready", "if you are ready to hear the word, enter anything in")
-    if (len(Start) > 0):
+    Start = trtl.textinput("Ready", "if you are ready to hear the word, click enter")
+    if (len(Start) >= 0):
         index = rand.randrange(len(Lvl1))
         index2 = index
      
@@ -148,6 +157,7 @@ lvlwriter.write("Level 2: Hard", font = font_setup)
 
 #Now do the same for LVL2
 for step in range (3):
+    update_round()
     if (block_num < 1):
         lvlwriter.clear()
         writer.clear()
@@ -157,8 +167,8 @@ for step in range (3):
         writer.write(f"{Uname}'s Score: {score}", font= ("Arial", 50, "normal"))
         break
 
-    Start = trtl.textinput("Ready", "if you are ready to hear the word, enter anything in")
-    if (len(Start) > 0):
+    Start = trtl.textinput("Ready", "if you are ready to hear the word, click enter")
+    if (len(Start) >= 0):
         index = rand.randrange(len(Lvl2))
         index2 = index
      
@@ -215,14 +225,15 @@ for step in range (3):
 
             Lvl2.pop(index)
             audio2.pop(index)
-    update_round()
 
-lvlwriter.clear()
-writer.clear()
-writer.goto(-170, 300)
-writer.write("YOU WIN!", font= ("Arial", 50, "normal"))
-writer.goto(150,-295)
-writer.write(f"{Uname}'s Score: {score}", font= ("Arial", 30, "normal"))
+
+if (round >= 4):
+    lvlwriter.clear()
+    writer.clear()
+    writer.goto(-210, 300)
+    writer.write("YOU SURVIVED!", font= ("Arial", 50, "normal"))
+    writer.goto(150,-295)
+    writer.write(f"{Uname}'s Score: {score}", font= ("Arial", 30, "normal"))
 
 #Once that is working for all three word banks, add the character turtle to the block tower
 
